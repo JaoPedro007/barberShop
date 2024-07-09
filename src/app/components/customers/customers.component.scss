@@ -1,0 +1,36 @@
+
+  .custom-card {
+    display: flex;
+    align-items: center;
+    width: 100%;;
+  }
+  
+  .card-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .client-image {
+    width: 80px; 
+    height: 80px; 
+    object-fit: cover;
+    margin-right: 10px; 
+    border-radius: 50%;
+  }
+  
+  .info-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  ion-card-title {
+    font-size: 18px; 
+  }
+  
+  ion-card-subtitle {
+    font-size: 14px; 
+    color: rgb(108, 100, 228);
+  }
+
+  
