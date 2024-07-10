@@ -1,0 +1,35 @@
+<ion-app>
+  <app-menu></app-menu>
+
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="end">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Settings</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+      <ion-card>
+        <img alt="BarberShop logo" src="https://static.vecteezy.com/ti/vetor-gratis/p1/11874742-de-logotipo-de-barbearia-gratis-vetor.jpg" />
+      </ion-card>
+
+      <app-float-input labelName="Company Name" placeHolder="Type the your company name"></app-float-input>
+      <app-float-input labelName="Barber Name" placeHolder="Type your name"></app-float-input>
+      <app-float-input labelName="Address" placeHolder="Type you address"></app-float-input>
+
+      <ion-list [inset]="true">
+        <app-checkbox day="Monday"></app-checkbox>
+        <app-checkbox day="Tuesday"></app-checkbox>
+        <app-checkbox day="Wednesday"></app-checkbox>
+        <app-checkbox day="Thursday"></app-checkbox>
+        <app-checkbox day="Friday"></app-checkbox>
+        <app-checkbox day="Saturday"></app-checkbox>
+        <app-checkbox day="Sunday"></app-checkbox>
+      </ion-list>
+
+    </ion-content>
+  </div>
+</ion-app>
