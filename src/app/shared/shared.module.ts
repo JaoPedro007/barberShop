@@ -6,7 +6,7 @@ import { CustomersComponent } from 'src/app/components/customers/customers.compo
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { IonicModule } from '@ionic/angular';
 import { FloatInputComponent } from '../components/float-input/float-input.component';
-import { DayTimeComponent } from '../components/checkbox/day-time.component';
+import { DayTimeComponent } from '../components/day-time/day-time.component';
 
 
 
