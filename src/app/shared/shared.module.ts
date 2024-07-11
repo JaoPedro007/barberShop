@@ -6,16 +6,16 @@ import { CustomersComponent } from 'src/app/components/customers/customers.compo
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { IonicModule } from '@ionic/angular';
 import { FloatInputComponent } from '../components/float-input/float-input.component';
-import { CheckboxComponent } from '../components/checkbox/checkbox.component';
+import { DayTimeComponent } from '../components/checkbox/day-time.component';
 
 
 
 @NgModule({
-  declarations: [MenuComponent, CustomersComponent, ButtonComponent, ItemComponent, FloatInputComponent, CheckboxComponent],
+  declarations: [MenuComponent, CustomersComponent, ButtonComponent, ItemComponent, FloatInputComponent, DayTimeComponent],
   imports: [
     CommonModule,
     IonicModule
   ],
-  exports: [MenuComponent, CustomersComponent, ButtonComponent, ItemComponent, FloatInputComponent, CheckboxComponent]
+  exports: [MenuComponent, CustomersComponent, ButtonComponent, ItemComponent, FloatInputComponent, DayTimeComponent]
 })
 export class SharedModule { }

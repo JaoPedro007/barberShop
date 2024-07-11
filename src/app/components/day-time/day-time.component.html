@@ -1,0 +1,23 @@
+<ion-item>
+  <ion-checkbox slot="start" aria-label="Day of work" (ionChange)="toggleCheckbox($event)" [checked]="isChecked"></ion-checkbox>
+  <ion-label aria-label="Day of work">{{day}}</ion-label>
+
+  <ion-datetime-button [datetime]="startDate" [disabled]="!isChecked"></ion-datetime-button>
+  <ion-datetime-button [datetime]="endDate" [disabled]="!isChecked"></ion-datetime-button>
+
+  <ion-modal [keepContentsMounted]="true" class="startDate">
+    <ng-template>
+      <ion-datetime [id]="startDate" presentation="time" display-format="HH:mm" [disabled]="!isChecked" [showDefaultButtons]="true" minuteValues="0,15,30,45">
+        <span slot="title">Start Date</span>
+      </ion-datetime>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [keepContentsMounted]="true" class="endDate">
+    <ng-template>
+      <ion-datetime [id]="endDate" presentation="time" display-format="HH:mm" [disabled]="!isChecked" [showDefaultButtons]="true" minuteValues="0,15,30,45">
+        <span slot="title">End Date</span>
+      </ion-datetime>
+    </ng-template>
+  </ion-modal>
+</ion-item>
