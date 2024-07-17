@@ -6,16 +6,9 @@ import { Component, Input } from '@angular/core';
 })
 export class DayTimeComponent {
   @Input() day: string='';
-  endDate: string='';
-  startDate: string='';
   isChecked: boolean = false;
+  
+  constructor(){}
 
-  toggleCheckbox(event: CustomEvent) {
-    this.isChecked = event.detail.checked;
-  }
-
-  ngOnInit() {
-    this.startDate = `startDate-${this.day}`;
-    this.endDate = `endDate-${this.day}`;
-  }
+  async ngOnInit() {}
 }

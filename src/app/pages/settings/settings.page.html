@@ -16,10 +16,20 @@
         <img alt="BarberShop logo" src="https://static.vecteezy.com/ti/vetor-gratis/p1/11874742-de-logotipo-de-barbearia-gratis-vetor.jpg" />
       </ion-card>
 
-      <app-float-input labelName="Company Name" placeHolder="Type the your company name"></app-float-input>
-      <app-float-input labelName="Barber Name" placeHolder="Type your name"></app-float-input>
-      <app-float-input labelName="Address" placeHolder="Type you address"></app-float-input>
-
+      <ion-item>
+        <ion-label position="floating">Company Name</ion-label>
+        <ion-input [(ngModel)]="companyName" type="text"></ion-input>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label position="floating">Barber Name</ion-label>
+        <ion-input [(ngModel)]="barberName" type="text"></ion-input>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label position="floating">Address</ion-label>
+        <ion-input [(ngModel)]="address" type="text"></ion-input>
+      </ion-item>
 
       <p>Enter date and time of operation</p>
 
@@ -31,6 +41,7 @@
       <app-day-time day="Saturday"></app-day-time>
       <app-day-time day="Sunday"></app-day-time>
 
+      <app-button buttonName="Save" (buttonClick)="saveCompanyData()"></app-button>
     </ion-content>
   </div>
 </ion-app>
