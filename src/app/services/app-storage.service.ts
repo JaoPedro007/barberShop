@@ -14,7 +14,7 @@ export class AppStorageService {
     await this.storage.create();
   }
 
-  async save(data: { companyName: string; barberName: string; address: string }): Promise<void> {
+  async saveCompanyData(data: { companyName: string; barberName: string; address: string }): Promise<void> {
     const { companyName, barberName, address } = data;
 
     await this.storage.set('companyName', companyName);
@@ -23,7 +23,7 @@ export class AppStorageService {
   }
 
 
-  async loadData(): Promise<{ companyName: string; barberName: string; address: string }> {
+  async loadCompanyData(): Promise<{ companyName: string; barberName: string; address: string }> {
     const companyName = await this.storage.get('companyName');
     const barberName = await this.storage.get('barberName');
     const address = await this.storage.get('address');
@@ -31,4 +31,21 @@ export class AppStorageService {
     return { companyName, barberName, address };
   }
 
+  async saveHaircutData(haircuts: { haircutName: string; price: string }[]): Promise<void> {
+    try {
+      await this.storage.set('haircuts', haircuts);
+    } catch (error) {
+      console.error('An error occurred while saving data:', error);
+    }
+  }
+
+  async loadHaircutData(): Promise<{ haircutName: string; price: string }[]> {
+    try {
+      const data = await this.storage.get('haircuts');
+      return data || []; // Retorna um array vazio se não houver dados
+    } catch (error) {
+      console.error('An error occurred while loading data:', error);
+      return []; // Retorna um array vazio em caso de erro
+    }
+  }
 }

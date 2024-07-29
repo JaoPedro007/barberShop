@@ -18,7 +18,7 @@ export class SettingsPage {
 
   async loadCompanyData() {
     try {
-      const data = await this.appStorageService.loadData();
+      const data = await this.appStorageService.loadCompanyData();
       this.companyName = data.companyName || '';
       this.barberName = data.barberName || '';
       this.address = data.address || '';
@@ -35,7 +35,7 @@ export class SettingsPage {
     };
 
     try {
-      await this.appStorageService.save(companyData);
+      await this.appStorageService.saveCompanyData(companyData);
     } catch (error) {
       console.error('An error occurred while saving the data:', error);
     }

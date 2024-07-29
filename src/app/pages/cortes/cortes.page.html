@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Cortes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let haircut of haircuts">
+      <ion-label>
+        <h2>{{ haircut.haircutName }}</h2>
+        <p>{{ haircut.price }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-item>
+    <ion-label position="floating">Nome do Corte</ion-label>
+    <ion-input [(ngModel)]="haircutName"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Preço</ion-label>
+    <ion-input [(ngModel)]="price"></ion-input>
+  </ion-item>
+
+  <ion-button expand="full" (click)="saveHaircutData()">Salvar Corte</ion-button>
+</ion-content>
