@@ -48,4 +48,22 @@ export class AppStorageService {
       return []; // Retorna um array vazio em caso de erro
     }
   }
+
+  async saveClient(clients: {id: number, name: string, dateTime: string,  service: string}[]): Promise<void>{
+    try {
+      await this.storage.set('clients', clients);
+    } catch (error) {
+      console.error('Erro ao savar dados do cliente.', error);
+    }
+  }
+
+  async loadClientsData(): Promise<{id: number, name: string, dateTime: string,  service: string}[]> {
+    try {
+      const data = await this.storage.get('clients');
+      return data || [];
+    } catch (error) {
+      console.error('Erro ao consultar dados dos clientes:', error);
+      return [];
+    }
+  }
 }

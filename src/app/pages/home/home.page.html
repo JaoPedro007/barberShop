@@ -7,18 +7,46 @@
         <ion-buttons slot="end">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>Home</ion-title>
+        <ion-title>{{companyName}}</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content class="ion-padding">
-      <ion-searchbar show-clear-button="focus" clear-icon="trash-bin" search-icon="Search-outline" placeholder="Search for the customer"></ion-searchbar>
+      <!-- <ion-searchbar show-clear-button="focus" clear-icon="trash-bin" search-icon="Search-outline" placeholder="Search for the customer"></ion-searchbar> -->
+      <!-- no dateTime daria para usar um ion-datetime-button, verificar como ficaria a transformação para data
+       -ver como fazer o alinhamento dos botões provavelmente usar o css
+       - talvez usar uma lista pra ver os servicos, baseado no cadastro de cortes
+       - criar nova função usando um .filter() para fazer funcionar a serch bar caso contrário remove-lá-->
       
-      <ion-list>
-        <app-customers name="João Pedro" date="09/07/2024 às 19:00h" service="Haircut and Beard"></app-customers>
-        <app-customers name="João Gaspar" date="09/07/2024 às 20:00h" service="Haircut"></app-customers>
-        <app-customers name="Guilherme" date="09/07/2024 às 20:40h" service="Beard"></app-customers>
+      <ion-list 
+         *ngFor="let client of clients"
+         class="list-clients">
+        <app-customers 
+            name="{{client.name}}"
+            date="{{client.dateTime}}" 
+            service="{{client.service}}">
+          </app-customers>
+          <ion-button (click)="removeClient(client)">Remover Agendamento</ion-button>
       </ion-list>
+      
+      <div class="insert-client">
+        <ion-item>
+          <ion-label position="floating">Nome</ion-label>
+          <ion-input [(ngModel)]="name"></ion-input>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label position="floating">Horário</ion-label>
+          <ion-input [(ngModel)]="dateTime"></ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="floating">Serviço</ion-label>
+          <ion-input [(ngModel)]="service"></ion-input>
+        </ion-item>
+      
+        <ion-button (click)="saveClient()">Salvar</ion-button>
+      </div>
     </ion-content>
   </div>
 </ion-app>
