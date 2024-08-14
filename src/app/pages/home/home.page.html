@@ -18,34 +18,48 @@
        - talvez usar uma lista pra ver os servicos, baseado no cadastro de cortes
        - criar nova função usando um .filter() para fazer funcionar a serch bar caso contrário remove-lá-->
       
-      <ion-list 
-         *ngFor="let client of clients"
-         class="list-clients">
-        <app-customers 
-            name="{{client.name}}"
-            date="{{client.dateTime}}" 
-            service="{{client.service}}">
-          </app-customers>
-          <ion-button (click)="removeClient(client)">Remover Agendamento</ion-button>
-      </ion-list>
-      
-      <div class="insert-client">
-        <ion-item>
-          <ion-label position="floating">Nome</ion-label>
-          <ion-input [(ngModel)]="name"></ion-input>
-        </ion-item>
-      
-        <ion-item>
-          <ion-label position="floating">Horário</ion-label>
-          <ion-input [(ngModel)]="dateTime"></ion-input>
-        </ion-item>
-  
-        <ion-item>
-          <ion-label position="floating">Serviço</ion-label>
-          <ion-input [(ngModel)]="service"></ion-input>
-        </ion-item>
-      
-        <ion-button (click)="saveClient()">Salvar</ion-button>
+       
+       <div class="insert-client">
+         <ion-item>
+           <ion-label position="floating">Customer Name</ion-label>
+           <ion-input [(ngModel)]="name"></ion-input>
+          </ion-item>
+          
+          <ion-item>
+            <ion-label>Select datetime</ion-label>
+            <ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime id="datetime"></ion-datetime>
+              </ng-template>
+            </ion-modal>
+          </ion-item>
+
+          
+          <ion-list>
+            <ion-item>
+              <ion-select aria-label="Services" placeholder="Select all services" [multiple]="true">
+                <ion-select-option *ngFor="let haircut of haircuts" [value]="haircut.haircutName">
+                  {{haircut.haircutName}} - {{haircut.price}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          
+          <ion-button (click)="saveSchedule()">Save</ion-button>
+
+           <ion-list *ngFor="let client of clients">
+             <div class="client-details">
+               <app-customers 
+               name="{{client.name}}"
+               date="{{client.datetime}}" 
+               service="{{client.service}}">
+              </app-customers>
+            </div>
+            <ion-button class="remove-schedule" (click)="removeClient(client)">Remove schedule</ion-button>
+          </ion-list>
+          
       </div>
     </ion-content>
   </div>

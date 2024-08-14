@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CortesPageRoutingModule } from './cortes-routing.module';
+import { HaircutPageRoutingModule } from './haircut-routing.module';
 
-import { CortesPage } from './cortes.page';
+import { HaircutPage } from './haircut.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CortesPageRoutingModule
+    HaircutPageRoutingModule
   ],
-  declarations: [CortesPage]
+  declarations: [HaircutPage]
 })
-export class CortesPageModule {}
+export class HaircutPageModule {}

@@ -42,14 +42,14 @@ export class AppStorageService {
   async loadHaircutData(): Promise<{ haircutName: string; price: string }[]> {
     try {
       const data = await this.storage.get('haircuts');
-      return data || []; // Retorna um array vazio se não houver dados
+      return data || [];
     } catch (error) {
       console.error('An error occurred while loading data:', error);
-      return []; // Retorna um array vazio em caso de erro
+      return [];
     }
   }
 
-  async saveClient(clients: {id: number, name: string, dateTime: string,  service: string}[]): Promise<void>{
+  async saveClient(clients: {id: number, name: string, datetime: string,  service: string}[]): Promise<void>{
     try {
       await this.storage.set('clients', clients);
     } catch (error) {
@@ -57,7 +57,7 @@ export class AppStorageService {
     }
   }
 
-  async loadClientsData(): Promise<{id: number, name: string, dateTime: string,  service: string}[]> {
+  async loadClientsData(): Promise<{id: number, name: string, datetime: string,  service: string}[]> {
     try {
       const data = await this.storage.get('clients');
       return data || [];

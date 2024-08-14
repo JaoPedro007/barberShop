@@ -16,8 +16,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
   },
   {
-    path: 'cortes',
-    loadChildren: () => import('./pages/cortes/cortes.module').then( m => m.CortesPageModule)
+    path: 'haircut',
+    loadChildren: () => import('./pages/haircut/haircut.module').then( m => m.HaircutPageModule)
   },
 
 ];

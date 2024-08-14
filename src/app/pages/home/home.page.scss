@@ -1,14 +1,18 @@
-.insert-client{
+.insert-client {
     margin-top: 15px;
-}
-
-.list-clients{
+  }
+  
+ion-list {
     display: flex;
-    justify-content: space-evenly;
-    align-items: center
+    flex-direction: row;
+    align-items: baseline;
 }
-
-ion-button{
-    height: fit-content;
-    align-items: center; 
+  
+.client-details {
+    width: 75%;
 }
+  
+.remove-schedule {
+    width: 25%;
+}
+  

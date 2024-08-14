@@ -1,0 +1,22 @@
+ion-list {
+    margin-top: 10%;
+    display: block; 
+  }
+  
+  ion-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  ion-button {
+    white-space: nowrap;
+    margin-top: 10px;
+  }
+  
