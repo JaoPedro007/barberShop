@@ -9,7 +9,7 @@ import { CustomersComponent } from 'src/app/components/customers/customers.compo
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { FloatInputComponent } from '../components/float-input/float-input.component';
 import { DayTimeComponent } from '../components/day-time/day-time.component';
-
+import { CustomDateFormatPipe } from '../pipes/custom-date-format.pipe';
 @NgModule({
   declarations: [
     MenuComponent,
@@ -17,7 +17,8 @@ import { DayTimeComponent } from '../components/day-time/day-time.component';
     ButtonComponent,
     ItemComponent,
     FloatInputComponent,
-    DayTimeComponent
+    DayTimeComponent,
+    CustomDateFormatPipe
   ],
   imports: [
     CommonModule,
@@ -30,7 +31,8 @@ import { DayTimeComponent } from '../components/day-time/day-time.component';
     ButtonComponent,
     ItemComponent,
     FloatInputComponent,
-    DayTimeComponent
+    DayTimeComponent,
+    CustomDateFormatPipe
   ]
 })
 export class SharedModule { }

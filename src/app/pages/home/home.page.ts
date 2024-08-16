@@ -8,10 +8,10 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  id: number = 1;
+  id: number = Date.now();
   name: string = '';
-  datetime: string = '';
-  service: string = '';
+  selectedDateTime: string = '';
+  selectedServices: string[] = [];
   clients: {id: number, name: string, datetime: string, service: string}[] = [];
   haircuts: { haircutName: string, price: string }[] = [];
 
@@ -36,26 +36,31 @@ export class HomePage {
     }
   }
 
+  async onDateTimeChange(event: any) {
+    this.selectedDateTime = event.detail.value;
+  }
+
+
   async saveSchedule() {
-    if (this.name.length != 0 && this.datetime.length != 0 && this.service.length != 0) {
-      const newSchedule = {
+    if (this.name.length !== 0 && this.selectedDateTime.length !== 0 && this.selectedServices.length !== 0) {
+      const schedule = {
         id: this.id,
         name: this.name,
-        datetime: this.datetime,
-        service: this.service
+        datetime: this.selectedDateTime,
+        service: this.selectedServices.join(', ') // converte o array em uma string separada por vírgulas
       };
-      this.clients.push(newSchedule);
-  
+      this.clients.push(schedule);
+
       try {
         await this.appStorageService.saveClient(this.clients);
         console.log("Customer saved successfully");
       } catch (error) {
-        console.error('An error occurred by saving a new customer', error);
+        console.error('An error occurred while saving a new customer', error);
       }
     } else {
       console.log(this.name);
-      console.log(this.datetime);
-      console.log(this.service);
+      console.log(this.selectedDateTime);
+      console.log(this.selectedServices);
       this.showAlert("Fill in all data");
     }
   }

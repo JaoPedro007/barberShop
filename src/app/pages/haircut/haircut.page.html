@@ -1,37 +1,41 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="end">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Haircuts</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-app>
+  <app-menu></app-menu>
 
-<ion-content>
-  
-  <ion-item>
-    <ion-label position="floating">Name of haircut</ion-label>
-    <ion-input [(ngModel)]="haircutName"></ion-input>
-  </ion-item>
-  
-  <ion-item>
-    <ion-label position="floating">Price</ion-label>
-    <ion-input [(ngModel)]="price"></ion-input>
-  </ion-item>
-  
-  <ion-button expand="full" (click)="saveHaircutData()">Save</ion-button>
+  <div class="ion-page" id="main-content">
 
-  <ion-list *ngFor="let haircut of haircuts">
-    <ion-item>
-      <div class="item-content">
-        <ion-label>
-          <h2>{{haircut.haircutName}}</h2>
-          <p>{{haircut.price}}</p>
-        </ion-label>
-        <ion-button (click)="removeHaircut(haircut)">Remove Haircut</ion-button>
-      </div>
-    </ion-item>
-  </ion-list>
-  
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="end">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Haircuts</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-</ion-content>
+    <ion-content>
+      <ion-item>
+        <ion-label position="floating">Name of haircut</ion-label>
+        <ion-input [(ngModel)]="haircutName"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label position="floating">Price</ion-label>
+        <ion-input [(ngModel)]="price"></ion-input>
+      </ion-item>
+      
+      <ion-button expand="full" (click)="saveHaircutData()">Save</ion-button>
+
+      <ion-list *ngFor="let haircut of haircuts">
+        <ion-item>
+          <div class="item-content">
+            <ion-label>
+              <h2>{{haircut.haircutName}}</h2>
+              <p>{{haircut.price}}</p>
+            </ion-label>
+            <ion-button (click)="removeHaircut(haircut)">Remove Haircut</ion-button>
+          </div>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </div>
+</ion-app>
