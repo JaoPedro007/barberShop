@@ -1,5 +1,7 @@
 {
   "name": "barberShop",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

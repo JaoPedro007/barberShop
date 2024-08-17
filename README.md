@@ -23,3 +23,9 @@ npm install
 ```bash
 ionic serve
 ```
+
+3. Run the android project:
+```bash
+ionic cap open android
+```
+Note: You could also open the project directly from android studio
