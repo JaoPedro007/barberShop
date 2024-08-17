@@ -12,53 +12,45 @@
     </ion-header>
 
     <ion-content class="ion-padding">
-      <!-- <ion-searchbar show-clear-button="focus" clear-icon="trash-bin" search-icon="Search-outline" placeholder="Search for the customer"></ion-searchbar> -->
-      <!-- no dateTime daria para usar um ion-datetime-button, verificar como ficaria a transformação para data
-       -ver como fazer o alinhamento dos botões provavelmente usar o css
-       - talvez usar uma lista pra ver os servicos, baseado no cadastro de cortes
-       - criar nova função usando um .filter() para fazer funcionar a serch bar caso contrário remove-lá-->
+      <div class="insert-client">
+        <ion-item>
+          <ion-label position="floating">Customer Name</ion-label>
+          <ion-input [(ngModel)]="name"></ion-input>
+        </ion-item>
       
-       
-          <div class="insert-client">
-            <ion-item>
-              <ion-label position="floating">Customer Name</ion-label>
-              <ion-input [(ngModel)]="name"></ion-input>
-            </ion-item>
-          
-            <ion-item>
-              <ion-label>Select datetime</ion-label>
-              <ion-datetime-button datetime="datetime"></ion-datetime-button>
-              <ion-modal [keepContentsMounted]="true">
-                <ng-template>
-                  <ion-datetime id="datetime" (ionChange)="onDateTimeChange($event)"></ion-datetime>
-                </ng-template>
-              </ion-modal>
-            </ion-item>
-          
-            <ion-list>
-              <ion-item>
-                <ion-select aria-label="Services" placeholder="Select all services" [multiple]="true" [(ngModel)]="selectedServices">
-                  <ion-select-option *ngFor="let haircut of haircuts" [value]="haircut.haircutName">
-                    {{haircut.haircutName}} - {{haircut.price}}
-                  </ion-select-option>
-                </ion-select>
-              </ion-item>
-            </ion-list>
-          
-            <ion-button class="saveSchedule" (click)="saveSchedule()">Save</ion-button>
-          </div>
+        <ion-item>
+          <ion-label>Select datetime</ion-label>
+          <ion-datetime-button datetime="datetime"></ion-datetime-button>
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime id="datetime" (ionChange)="onDateTimeChange($event)"></ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ion-item>
+      
+        <ion-list>
+          <ion-item>
+            <ion-select aria-label="Services" placeholder="Select all services" [multiple]="true" [(ngModel)]="selectedServices">
+              <ion-select-option *ngFor="let haircut of haircuts" [value]="haircut.haircutName + ' - ' + haircut.price">
+                {{haircut.haircutName}} - {{haircut.price}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      
+        <ion-button class="saveSchedule" (click)="saveSchedule()">Save</ion-button>
+      </div>
 
-           <ion-list *ngFor="let client of clients">
-             <div class="client-details">
-               <app-customers 
-               name="{{client.name}}"
-               date="{{client.datetime | customDateFormat}}" 
-               service="{{client.service}}">
-              </app-customers>
-            </div>
-            <ion-button class="remove-schedule" (click)="removeClient(client)">Remove schedule</ion-button>
-          </ion-list>
-          
+      <ion-list *ngFor="let client of clients">
+        <div class="client-details">
+          <app-customers 
+          name="{{client.name}}"
+          date="{{client.datetime | customDateFormat}}" 
+          service="{{client.service}}">
+          </app-customers>
+        </div>
+        <ion-button class="remove-schedule" (click)="removeClient(client)">Remove schedule</ion-button>
+      </ion-list> 
     </ion-content>
   </div>
 </ion-app>
