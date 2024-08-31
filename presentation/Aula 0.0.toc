@@ -1,0 +1,5 @@
+\babel@toc {brazil}{}\relax 
+\beamer@sectionintoc {1}{Apresentação}{2}{0}{1}
+\beamer@sectionintoc {2}{Por que usar?}{3}{0}{2}
+\beamer@sectionintoc {3}{Comandos básicos}{6}{0}{3}
+\beamer@sectionintoc {4}{App demonstração}{7}{0}{4}

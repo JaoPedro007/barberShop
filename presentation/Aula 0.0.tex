@@ -1,0 +1,175 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{utfpr_estilo}
+
+
+\newcounter{saveenumerate}
+\newcommand{\saveenumerate}{\setcounter{saveenumerate}{\value{enumi}}}
+\newcommand{\restartenumerate}{\setcounter{enumi}{\value{saveenumerate}}}
+
+\nomeTopico{Ionic + Angular}
+\barraInferior{UTFPR - TD}
+\author{Guilherme B. Spiger, João Pedro Leite e João Pedro Gaspar}
+\nomeEmail{}
+
+\begin{document}
+
+\frame{
+\titlepage
+}
+
+\frame{
+\frametitle{Conteúdo}
+\tableofcontents
+}
+
+
+\section{Apresentação}
+\begin{frame}[fragile]
+	\frametitle{\secname}
+	\begin{itemize}
+		\item O Ionic é um framework de desenvolvimento de aplicativos móveis e web que permite criar aplicações híbridas usando tecnologias web como HTML, CSS e JavaScript. Ele oferece uma série de componentes e ferramentas que facilitam o desenvolvimento de apps que podem ser executados em diferentes plataformas, como iOS, Android e web, a partir de uma única base de código.
+		\item Inicialmente totalmente atrelado ao Angular. Atualmente possui integração com os frameworks:
+		\begin{itemize}
+			\item Angular.
+			\item React.
+			\item Vue.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\section{Por que usar?}
+\begin{frame}[fragile]
+	\frametitle{\secname}
+	\begin{itemize}
+		\item Implementar uma só base de código front-end e exportar para múltiplas plataformas: (Web, Android e IOS).
+		\item Aproveitar conhecimento prévio em tecnologias web (HTML, CSS, JS).
+		\item Free and Open Source (MIT License). Pode ser usado em projetos pessoais e comerciais gratuitamente. 
+		\begin{itemize}
+			\item Possui funcionalidades pagas (Appflow), publicação direta nas app stores, live updates via dashboard SSO e etc. 
+			\item Código fonte: https://github.com/ionic-team/ionic-framework
+		\end{itemize}
+		\item Tem componentes prontos que emulam as UI nativas de cada sistema (Android, IOS) para seguir os padrões de cada sistema.
+		\item Lema: "Write once, run anywhere."	
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\secname}
+	\begin{itemize}
+		\item Aceso simplificado as API de cada sistema (abstração):
+	\end{itemize}
+	\begin{lstlisting}[language=Java]
+		import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
+		import { Filesystem, Directory } from '@capacitor/filesystem';
+		import { Preferences } from '@capacitor/preferences';
+		
+		public async addNewToGallery() {
+			// Take a photo
+			const capturedPhoto = await Camera.getPhoto({
+				resultType: CameraResultType.Uri, // file-based data; provides best performance
+				source: CameraSource.Camera, // automatically take a new photo with the camera
+				quality: 100 // highest quality (0 to 100)
+			});
+			
+			// Save the picture and add it to photo collection
+			const savedImageFile = await this.savePicture(capturedPhoto);
+		} //... continua no proximo slide
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\secname}
+	\begin{lstlisting}[language=Java]
+		...
+		private async savePicture(photo: Photo) {
+			// Convert photo to base64 format, required by Filesystem API to save
+			const base64Data = await this.readAsBase64(photo);
+			
+			// Write the file to the data directory
+			const fileName = Date.now() + '.jpeg';
+			const savedFile = await Filesystem.writeFile({
+				path: fileName,
+				data: base64Data,
+				directory: Directory.Data
+			});
+			
+			return {
+				filepath: fileName,
+				webviewPath: photo.webPath
+			};
+		}
+	\end{lstlisting}
+\end{frame}
+
+\section{Comandos básicos}
+\begin{frame}[fragile]
+	\frametitle{\secname}
+	\begin{lstlisting}[language = bash]
+		# Install
+		$ npm install -g @ionic/cli native-run cordova-res
+		
+		# Create new app
+		$ ionic start photo-gallery tabs --type=angular --capacitor 
+		
+		# Run web app
+		$ ionic serve
+		
+		# Create a new service class
+		$ ionic g service services/photo
+		
+		#Export project 
+		$ ionic cap add ios
+		$ ionic cap add android
+		
+		#Update changes from web to apps
+		$ ionic cap copy
+		$ ionic cap sync
+				
+	\end{lstlisting}
+\end{frame}
+
+\section{App demonstração}
+\begin{frame}[fragile]
+	\frametitle{\secname}
+	\begin{itemize}
+		\item Apresentação de código e funcionalidade do App BarberShop.
+	\end{itemize}
+\end{frame}
+
+\begin{comment}
+\begin{frame}[fragile]
+	\frametitle{\secname}
+	\begin{itemize}
+		\item Exemplo de um slide com figura.
+	\end{itemize}
+	\begin{figure}[!htbp]
+		\centering
+		\includegraphics[width=0.5\linewidth]{fig/utfpr}
+	\end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{\secname}
+	 	\begin{center}
+	\begin{figure}[!h]
+		\centering
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width=0.85\linewidth]{fig/utfpr}
+			\caption{Logo da UTFPR.}
+			\label{fig:sub1}
+		\end{subfigure}%
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width= .3\linewidth]{fig/tsi}
+			\caption{Logo de TSI.}
+			\label{fig:sub2}
+		\end{subfigure}
+		\caption{Exemplos de logos.}
+		\label{fig:test}
+	\end{figure}
+\end{center}
+\end{frame}
+\end{comment}
+\end{document}
