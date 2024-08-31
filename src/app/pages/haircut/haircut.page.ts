@@ -27,6 +27,16 @@ export class HaircutPage implements OnInit {
   }
 
   async saveHaircutData() {
+    if(this.haircutName.length == 0){
+      this.showAlert("Informe o nome do corte!");
+      return;
+    }
+    
+    if(this.price.length == 0){
+      this.showAlert("Informe o valor do corte!");
+      return;
+    }
+    
     if(this.haircutName.length != 0 && this.price.length !=0 ){
       const newHaircut = {
         haircutName: this.haircutName,
@@ -34,11 +44,13 @@ export class HaircutPage implements OnInit {
       };
       this.haircuts.push(newHaircut);
       try {
-        await this.appStorageService.saveHaircutData(this.haircuts);
-        
+        await this.appStorageService.saveHaircutData(this.haircuts); 
       } catch (error) {
         console.error('An error occurred while saving the haircut data:', error);
       }
+
+      this.haircutName = '';
+      this.price = '';
     }
     else{
       this.showAlert("Fill all data");

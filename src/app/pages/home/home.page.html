@@ -23,7 +23,7 @@
           <ion-datetime-button datetime="datetime"></ion-datetime-button>
           <ion-modal [keepContentsMounted]="true">
             <ng-template>
-              <ion-datetime id="datetime" (ionChange)="onDateTimeChange($event)"></ion-datetime>
+              <ion-datetime id="datetime" [min]="today" (ionChange)="onDateTimeChange($event)"></ion-datetime>
             </ng-template>
           </ion-modal>
         </ion-item>

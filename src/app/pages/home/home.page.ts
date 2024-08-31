@@ -8,6 +8,7 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  today: string = '';
   id: number = Date.now();
   name: string = '';
   selectedDateTime: string = '';
@@ -22,6 +23,8 @@ export class HomePage {
   constructor(private appStorageService: AppStorageService, private alertController: AlertController) { }
 
   async ngOnInit() {
+    this.today = new Date().toISOString();
+    // this.selectedDateTime = this.today;
     await this.loadClientData();
     await this.loadCompanyData();
     await this.loadHaircutData();
@@ -42,6 +45,30 @@ export class HomePage {
 
 
   async saveSchedule() {
+    if(this.name.trim() == ''){
+      this.showAlert('Preencha um nome!');
+      console.log(this.name);
+      console.log(this.selectedDateTime);
+      console.log(this.selectedServices);
+      return;
+    }
+
+    if(this.selectedDateTime.length == 0){
+      this.showAlert('Informe uma data e Hora!');
+      console.log(this.name);
+      console.log(this.selectedDateTime);
+      console.log(this.selectedServices);
+      return;
+    }
+    
+    if(this.selectedServices.length == 0){
+      this.showAlert('Selecione pelo menos um Serviço!');
+      console.log(this.name);
+      console.log(this.selectedDateTime);
+      console.log(this.selectedServices);
+      return;
+    }
+    
     if (this.name.length !== 0 && this.selectedDateTime.length !== 0 && this.selectedServices.length !== 0) {
       const schedule = {
         id: this.id,
@@ -51,17 +78,17 @@ export class HomePage {
       };
       this.clients.push(schedule);
 
+    // clear screen data
+    this.name = '';
+    this.selectedDateTime = '';
+    this.selectedServices = [];
+
       try {
         await this.appStorageService.saveClient(this.clients);
         console.log("Customer saved successfully");
       } catch (error) {
         console.error('An error occurred while saving a new customer', error);
       }
-    } else {
-      console.log(this.name);
-      console.log(this.selectedDateTime);
-      console.log(this.selectedServices);
-      this.showAlert("Fill in all data");
     }
   }
   
