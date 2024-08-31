@@ -12,164 +12,188 @@
 \nomeEmail{}
 
 \begin{document}
-
-\frame{
-\titlepage
-}
-
-\frame{
-\frametitle{Conteúdo}
-\tableofcontents
-}
-
-
-\section{Apresentação}
-\begin{frame}[fragile]
-	\frametitle{\secname}
-	\begin{itemize}
-		\item O Ionic é um framework de desenvolvimento de aplicativos móveis e web que permite criar aplicações híbridas usando tecnologias web como HTML, CSS e JavaScript. Ele oferece uma série de componentes e ferramentas que facilitam o desenvolvimento de apps que podem ser executados em diferentes plataformas, como iOS, Android e web, a partir de uma única base de código.
-		\item Inicialmente totalmente atrelado ao Angular. Atualmente possui integração com os frameworks:
+	
+	\frame{
+		\titlepage
+	}
+	
+	\frame{
+		\frametitle{Conteúdo}
+		\tableofcontents
+	}
+	
+	
+	\section{Apresentação}
+	\begin{frame}[fragile]
+		\frametitle{\secname}
 		\begin{itemize}
-			\item Angular.
-			\item React.
-			\item Vue.
+			\item O Ionic é um framework de desenvolvimento de aplicativos móveis e web que permite criar aplicações híbridas usando tecnologias web como HTML, CSS e JavaScript. Ele oferece uma série de componentes e ferramentas que facilitam o desenvolvimento de apps que podem ser executados em diferentes plataformas, como iOS, Android e web, a partir de uma única base de código.
+			\item Inicialmente totalmente atrelado ao Angular. Atualmente possui integração com os frameworks:
+			\begin{itemize}
+				\item Angular.
+				\item React.
+				\item Vue.
+			\end{itemize}
 		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-\section{Por que usar?}
-\begin{frame}[fragile]
-	\frametitle{\secname}
-	\begin{itemize}
-		\item Implementar uma só base de código front-end e exportar para múltiplas plataformas: (Web, Android e IOS).
-		\item Aproveitar conhecimento prévio em tecnologias web (HTML, CSS, JS).
-		\item Free and Open Source (MIT License). Pode ser usado em projetos pessoais e comerciais gratuitamente. 
+	\end{frame}
+	
+	\section{Por que usar?}
+	\begin{frame}[fragile]
+		\frametitle{\secname}
 		\begin{itemize}
-			\item Possui funcionalidades pagas (Appflow), publicação direta nas app stores, live updates via dashboard SSO e etc. 
-			\item Código fonte: https://github.com/ionic-team/ionic-framework
+			\item Implementar uma só base de código front-end e exportar para múltiplas plataformas: (Web, Android e IOS).
+			\item Aproveitar conhecimento prévio em tecnologias web (HTML, CSS, JS).
+			\item Free and Open Source (MIT License). Pode ser usado em projetos pessoais e comerciais gratuitamente. 
+			\begin{itemize}
+				\item Possui funcionalidades pagas (Appflow), publicação direta nas app stores, live updates via dashboard SSO e etc. 
+				\item Código fonte: https://github.com/ionic-team/ionic-framework
+			\end{itemize}
+			\item Tem componentes prontos que emulam as UI nativas de cada sistema (Android, IOS) para seguir os padrões de cada sistema.
+			\item Lema: "Write once, run anywhere."	
 		\end{itemize}
-		\item Tem componentes prontos que emulam as UI nativas de cada sistema (Android, IOS) para seguir os padrões de cada sistema.
-		\item Lema: "Write once, run anywhere."	
-	\end{itemize}
-\end{frame}
+	\end{frame}
+	
+	\begin{frame}
+		\begin{itemize}
+			\item Aceso simplificado as API de cada sistema (abstração):
+		\end{itemize}
+		\begin{center}
+			\includegraphics[width=0.7\textwidth]{fig/import.png}
+		\end{center}
+	\end{frame}
+	
+	\begin{frame}
+		\begin{itemize}
+			\item Utilizando o storage de forma abstrata:
+		\end{itemize}
+		\begin{center}
+			\includegraphics[width=1\textwidth]{fig/storage.png}
+		\end{center}
+	\end{frame}
 
-\begin{frame}[fragile]
-	\frametitle{\secname}
-	\begin{itemize}
-		\item Aceso simplificado as API de cada sistema (abstração):
-	\end{itemize}
-	\begin{lstlisting}[language=Java]
-		import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
-		import { Filesystem, Directory } from '@capacitor/filesystem';
-		import { Preferences } from '@capacitor/preferences';
-		
-		public async addNewToGallery() {
-			// Take a photo
-			const capturedPhoto = await Camera.getPhoto({
-				resultType: CameraResultType.Uri, // file-based data; provides best performance
-				source: CameraSource.Camera, // automatically take a new photo with the camera
-				quality: 100 // highest quality (0 to 100)
-			});
+	
+	\section{Comandos básicos}
+	\begin{frame}[fragile]
+		\frametitle{\secname}
+		\begin{lstlisting}[language = bash]
+			# Install
+			$ npm install -g @ionic/cli native-run cordova-res
 			
-			// Save the picture and add it to photo collection
-			const savedImageFile = await this.savePicture(capturedPhoto);
-		} //... continua no proximo slide
-	\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{\secname}
-	\begin{lstlisting}[language=Java]
-		...
-		private async savePicture(photo: Photo) {
-			// Convert photo to base64 format, required by Filesystem API to save
-			const base64Data = await this.readAsBase64(photo);
+			# Create new app
+			$ ionic start photo-gallery tabs --type=angular --capacitor 
 			
-			// Write the file to the data directory
-			const fileName = Date.now() + '.jpeg';
-			const savedFile = await Filesystem.writeFile({
-				path: fileName,
-				data: base64Data,
-				directory: Directory.Data
-			});
+			# Run web app
+			$ ionic serve
 			
-			return {
-				filepath: fileName,
-				webviewPath: photo.webPath
-			};
-		}
-	\end{lstlisting}
-\end{frame}
+			# Create a new service class
+			$ ionic g service services/photo
+			
+			#Export project 
+			$ ionic cap add ios
+			$ ionic cap add android
+			
+			#Update changes from web to apps
+			$ ionic cap copy
+			$ ionic cap sync
+			
+		\end{lstlisting}
+	\end{frame}
+	
+	\section{Progressive Web App (PWA)}
+	\begin{frame}[fragile]
+		\frametitle{\secname}
+		\begin{itemize}
+			\item Progressive Web Apps (PWAs) são aplicativos da web que utilizam tecnologias modernas para oferecer uma experiência semelhante a aplicativos nativos.
+			\item PWAs funcionam bem em conjunto com o Capacitor, permitindo implantar o aplicativo como um PWA, além de aplicações nativas, aproveitando ambos os canais.
+		\end{itemize}
+	\end{frame}
+	
+	
+	\section{O que são Cordova e Capacitor?}
+	\begin{frame}[fragile]
+		\frametitle{\secname}
+		\begin{itemize}
+			\item \textbf{Cordova}
+			\begin{itemize}
+				\item Plataforma de desenvolvimento de aplicativos móveis híbridos de código aberto.
+				\item Permite que aplicativos web acessem funcionalidades nativas do dispositivo através de plugins.
+				\item Usado com o Ionic para construir e implantar aplicativos em iOS, Android e outras plataformas.
+			\end{itemize}
+			\item \textbf{Capacitor}
+			\begin{itemize}
+				\item Plataforma de runtime de código aberto desenvolvida pela equipe do Ionic.
+				\item Facilita o acesso a APIs nativas e a criação de Progressive Web Apps (PWAs).
+				\item Alternativa moderna ao Cordova, com melhor integração para aplicativos Ionic.
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
 
-\section{Comandos básicos}
-\begin{frame}[fragile]
-	\frametitle{\secname}
-	\begin{lstlisting}[language = bash]
-		# Install
-		$ npm install -g @ionic/cli native-run cordova-res
-		
-		# Create new app
-		$ ionic start photo-gallery tabs --type=angular --capacitor 
-		
-		# Run web app
-		$ ionic serve
-		
-		# Create a new service class
-		$ ionic g service services/photo
-		
-		#Export project 
-		$ ionic cap add ios
-		$ ionic cap add android
-		
-		#Update changes from web to apps
-		$ ionic cap copy
-		$ ionic cap sync
-				
-	\end{lstlisting}
-\end{frame}
+	
+	
+	\section{Cordova vs. Capacitor}
+	\begin{frame}[fragile]
+		\frametitle{\secname}
+		\begin{itemize}
+			\item \textbf{Capacitor}
+			\begin{itemize}
+				\item Moderno e mantido pela equipe do Ionic.
+				\item Suporte para Web e plataformas nativas.
+				\item Configuração mínima para integração com APIs nativas.
+				\item Utiliza APIs modernas e é mais fácil de manter e atualizar.
+				\item Oferece plugins de código aberto, mas permite usar plugins do Cordova.
+			\end{itemize}
+			\item \textbf{Cordova}
+			\begin{itemize}
+				\item Mais antigo e amplamente utilizado.
+				\item Base para muitos projetos híbridos legados.
+				\item Requer configurações adicionais para integração com APIs nativas.
+				\item Pode ter limitações com APIs modernas e novas funcionalidades.
+				\item Grande suporte da comunidade e variedade de plugins.
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	
+	\section{Estrutura do Projeto}
+	\begin{frame}[fragile]
+		\frametitle{\secname}
+		\begin{itemize}
+			\item \textbf{src/}
+			\begin{itemize}
+				\item \texttt{app/}: Contém os módulos e componentes principais do aplicativo.
+				\item \texttt{assets/}: Recursos estáticos, como imagens, ícones, e fontes.
+				\item \texttt{environments/}: Arquivos de configuração específicos para diferentes ambientes (produção, desenvolvimento).
+				\item \texttt{index.html}: Arquivo HTML principal que serve como entrada para o aplicativo.
+				\item \texttt{main.ts}: Ponto de entrada do aplicativo, responsável por inicializar o Angular.
+				\item \texttt{theme/}: Contém arquivos de estilo global do projeto (ex: \texttt{variables.scss}).
+			\end{itemize}
+			\item \textbf{ionic.config.json}
+			\begin{itemize}
+				\item Configurações específicas do projeto Ionic, como nome do aplicativo e tipo de projeto.
+			\end{itemize}
+			\item \textbf{angular.json}
+			\begin{itemize}
+				\item Configurações do Angular CLI, incluindo caminhos de build e configurações de projeto.
+			\end{itemize}
+			\item \textbf{package.json}
+			\begin{itemize}
+				\item Lista as dependências do projeto, scripts de construção etc.
+			\end{itemize}
+			\item \textbf{www/}
+			\begin{itemize}
+				\item Diretório onde os arquivos compilados são colocados para distribuição. Gerado durante o processo de build.
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
 
-\section{App demonstração}
-\begin{frame}[fragile]
-	\frametitle{\secname}
-	\begin{itemize}
-		\item Apresentação de código e funcionalidade do App BarberShop.
-	\end{itemize}
-\end{frame}
+	
+	\section{App demonstração}
+	\begin{frame}[fragile]
+		\frametitle{\secname}
+		\begin{itemize}
+			\item Apresentação de código e funcionalidade do App BarberShop.
+		\end{itemize}
+	\end{frame}
+	
 
-\begin{comment}
-\begin{frame}[fragile]
-	\frametitle{\secname}
-	\begin{itemize}
-		\item Exemplo de um slide com figura.
-	\end{itemize}
-	\begin{figure}[!htbp]
-		\centering
-		\includegraphics[width=0.5\linewidth]{fig/utfpr}
-	\end{figure}
-\end{frame}
-
-
-\begin{frame}[fragile]
-	\frametitle{\secname}
-	 	\begin{center}
-	\begin{figure}[!h]
-		\centering
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=0.85\linewidth]{fig/utfpr}
-			\caption{Logo da UTFPR.}
-			\label{fig:sub1}
-		\end{subfigure}%
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width= .3\linewidth]{fig/tsi}
-			\caption{Logo de TSI.}
-			\label{fig:sub2}
-		\end{subfigure}
-		\caption{Exemplos de logos.}
-		\label{fig:test}
-	\end{figure}
-\end{center}
-\end{frame}
-\end{comment}
 \end{document}

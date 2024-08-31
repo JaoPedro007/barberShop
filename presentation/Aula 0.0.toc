@@ -1,5 +1,9 @@
 \babel@toc {brazil}{}\relax 
-\beamer@sectionintoc {1}{Apresentação}{2}{0}{1}
-\beamer@sectionintoc {2}{Por que usar?}{3}{0}{2}
-\beamer@sectionintoc {3}{Comandos básicos}{6}{0}{3}
-\beamer@sectionintoc {4}{App demonstração}{7}{0}{4}
+\beamer@sectionintoc {1}{Apresentação}{3}{0}{1}
+\beamer@sectionintoc {2}{Por que usar?}{4}{0}{2}
+\beamer@sectionintoc {3}{Comandos básicos}{7}{0}{3}
+\beamer@sectionintoc {4}{Progressive Web App (PWA)}{8}{0}{4}
+\beamer@sectionintoc {5}{O que são Cordova e Capacitor?}{9}{0}{5}
+\beamer@sectionintoc {6}{Cordova vs. Capacitor}{10}{0}{6}
+\beamer@sectionintoc {7}{Estrutura do Projeto}{11}{0}{7}
+\beamer@sectionintoc {8}{App demonstração}{12}{0}{8}
